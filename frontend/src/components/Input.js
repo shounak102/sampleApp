@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios                from 'axios';
+import Button               from '@mui/material/Button';
+import TextField            from '@mui/material/TextField';
+import Dialog               from '@mui/material/Dialog';
+import DialogActions        from '@mui/material/DialogActions';
+import DialogContent        from '@mui/material/DialogContent';
+import DialogTitle          from '@mui/material/DialogTitle';
+import InputAdornment       from '@mui/material/InputAdornment';
+import Stack                from '@mui/material/Stack';
 
 class Input extends Component {
 
@@ -8,16 +16,22 @@ class Input extends Component {
 		price : '',
 		desc  : '',
 		img   : '',
+		openModal: false,
 	};
 
-	addItem = () => {
-		const item = {
-			title : this.state.title,
-			price : this.state.price,
-			desc  : this.state.desc,
-			img   : this.state.img,
-		};
+	handleModalOpen = () => {
+		this.setState({
+			openModal: true,
+		});
+	}
 
+	handleModalClose = (ev, reason) => {
+		this.setState({
+			openModal: false,
+		})
+	}
+
+	addItem = (item) => {
 		/* Input validation */
 		if (!item.title || item.title.length <= 0){
 			console.log ('title field required');
@@ -77,17 +91,82 @@ class Input extends Component {
 	};
 
 	render() {
-    	let { title, desc, price, img } = this.state;
     	return (
 			<div>
-				<div className="inputContainer">
-					<input type="text" onChange={this.handleTitleChange} value={title} placeholder="Enter Guitar Name"/>
-					<input type="number" onChange={this.handlePriceChange} value={price} placeholder="Enter Price in Dollars"/>
-					<input type="text" onChange={this.handleDescChange} value={desc} placeholder="Enter Description"/>
-					<input type="text" onChange={this.handleImgChange} value={img} placeholder="Enter Image URL"/>
-				</div>
+				<Button onClick={this.handleModalOpen} variant="contained">Add Guitar</Button>
 
-				<button onClick={this.addItem}>Add Guitar</button>
+				<Dialog
+					className="inputModal"
+					fullWidth={true}
+					maxWidth="lg"
+					open={this.state.openModal}
+					onClose={this.handleModalClose}
+					PaperProps={{
+						component: 'form',
+						onSubmit: (event) => {
+							event.preventDefault ();
+							const formData = new FormData(event.currentTarget);
+							const formJson = Object.fromEntries(formData.entries());
+
+							const { title, price, desc, img } = formJson;
+							console.log ({ title, price, desc, img});
+							this.addItem ({ title, price, desc, img });
+							this.handleModalClose ();
+						},
+					}}
+				>
+					<DialogTitle>Enter Guitar Details</DialogTitle>
+					<DialogContent>
+						<Stack spacing={2}>
+							<TextField
+								required
+								id="title"
+								name="title"
+								label="Guitar Name"
+								type="text"
+								variant="outlined"
+								placeholder="Guitar Name"
+							/>
+							<TextField
+								required
+								id="price"
+								name="price"
+								label="Price"
+								type="number"
+								variant="outlined"
+								inputProps={{ step: 0.01 }}
+								InputProps={{
+									startAdornment: <InputAdornment position="start">$</InputAdornment>,
+								}}
+								placeholder="Price"
+							/>
+							<TextField
+								required
+								multiline
+								rows={4}
+								id="desc"
+								name="desc"
+								label="Description"
+								type="text"
+								variant="outlined"
+								placeholder="Guitar Description"
+							/>
+							<TextField
+								required
+								id="img"
+								name="img"
+								label="Image URL"
+								type="url"
+								variant="outlined"
+								placeholder="Image URL"
+							/>
+						</Stack>
+					</DialogContent>
+					<DialogActions>
+						<Button className="modal-buttons" onClick={this.handleModalClose} variant="outlined" color="error">Cancel</Button>
+						<Button className="modal-buttons" type="submit" variant="contained" color="success">Add Guitar</Button>
+					</DialogActions>
+				</Dialog>
 			</div>
 		);
 	}
