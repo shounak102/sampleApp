@@ -52,18 +52,18 @@ class Input extends Component {
 
 		axios
 			.post('/api/items/create', item)
-		.then((res) => {
-			if (res.data) {
-				this.props.getItems();
-				this.setState({
-					title : '',
-					desc  : '',
-					price : '',
-					img   : '',
-				});
-			}
-		})
-		.catch((err) => console.log(err));
+			.then((res) => {
+				if (res.data) {
+					this.props.getItems();
+					this.setState({
+						title : '',
+						desc  : '',
+						price : '',
+						img   : '',
+					});
+				}
+			})
+			.catch((err) => console.log(err));
 	};
 
 	handleTitleChange = (e) => {
@@ -116,7 +116,7 @@ class Input extends Component {
 					}}
 				>
 					<DialogTitle>Enter Guitar Details</DialogTitle>
-					<DialogContent>
+					<DialogContent className="input-modal-content">
 						<Stack spacing={2}>
 							<TextField
 								required

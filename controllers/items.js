@@ -25,6 +25,7 @@ class Controller {
 		if (req.params.id){
 			Item.findOneAndUpdate ({ _id: req.params.id }, {
 				title: req.body.title,
+				price: req.body.price,
 				img: req.body.img,
 				desc: req.body.desc
 			})

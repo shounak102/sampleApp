@@ -17,63 +17,98 @@ input {
 input:focus {
   outline: none;
 }
-button {
-  width: 25%;
-  height: 45px;
-  border: none;
-  margin-left: 10px;
-  font-size: 25px;
-  background: #101113;
-  border-radius: 5px;
-  color: #787a80;
-  cursor: pointer;
-}
+
 button:focus {
   outline: none;
 }
-ul {
-  list-style: none;
+.list-container {
   text-align: left;
   padding: 15px;
   background: #dddddd;
   border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 2%;
+  padding: 16px;
+  gap: 24px;
 }
-li {
-  padding: 15px;
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  background: #ffffff;
-  border-radius: 5px;
-  overflow-wrap: break-word;
-  cursor: pointer;
-}
+
 @media only screen and (min-width: 300px) {
-  .App {
-    width: 80%;
-  }
-  input {
-    width: 100%
-  }
-  button {
-    width: 100%;
-    margin-top: 15px;
-    margin-left: 0;
-  }
+	.App {
+		width: 80%;
+	}
+	input {
+		width: 100%
+	}
+	button {
+		width: 100%;
+		margin-top: 15px;
+		margin-left: 0;
+	}
+	.card-container {
+		width: calc(100% - 16px);	
+	}
+	.list-container::after {
+		min-width: calc(100% - 16px);
+		max-width: calc(100% - 16px);
+	}
+	.card-title {
+		font-size: 18px !important;
+	}
 }
 @media only screen and (min-width: 640px) {
-  .App {
-    width: 60%;
-  }
-  input {
-    width: 50%;
-  }
-  button {
-    width: 30%;
-    margin-left: 10px;
-    margin-top: 0;
-  }
+	.App {
+		width: 80%;
+	}
+	input {
+		width: 50%;
+	}
+	button {
+		width: 30%;
+		margin-left: 10px;
+		margin-top: 0;
+	}
+	.card-container {
+		width: calc(50% - 16px);	
+	}
+	.list-container::after {
+		min-width: calc(50% - 16px);
+		max-width: calc(50% - 16px);
+	}
+}
+
+@media only screen and (min-width: 1200px) {
+	.card-container {
+		width: calc(25% - 18px)	;
+		height: 340px;
+		margin-bottom: 16px;
+		box-sizing: border-box;
+	}
+
+	.list-container::after{
+		content: '';
+		flex-grow: 1;
+		min-width: calc(25% - 18px);
+		max-width: calc(25% - 18px);
+		margin: 0;
+	}
+}
+.card-title {
+	font-weight: bold !important;
 }
 .modal-buttons{
 	width: 20%;
 	min-width: 100px;
+}
+
+.dialog-img {
+	max-width: 100%;
+	display: block;
+	max-height: 400px;
+	margin: auto;
+}
+
+.input-modal-content {
+	padding-top: 20px !important;
 }

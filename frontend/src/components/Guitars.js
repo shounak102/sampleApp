@@ -36,13 +36,24 @@ class Items extends Component {
 			.catch((err) => console.log(err));
 	};
 
+	editItem = (item) => {
+		axios
+			.post (`/api/items/edit/${item._id}`, item)
+			.then((res) => {
+				if (res.data) {
+					this.getItems ();
+				}
+			})
+			.catch((err) => console.log(err));
+	}
+
 	render() {
 		let { items } = this.state;
 		return (
 			<div>
 				<h1>Shounak's Guitar Store</h1>
 				<Input getItems={this.getItems} />
-				<ListItem items={items} deleteItem={this.deleteItem} />
+				<ListItem items={items} deleteItem={this.deleteItem} editItem={this.editItem}/>
 			</div>
 		);
 	}
