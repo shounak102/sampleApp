@@ -133,7 +133,7 @@ Alternatively, you can run this using Docker.
 
 1.  Navigate to \$ROOT
 
-2.  Run docker build -t \$YOUR_IMAGE_NAME .\
+2.  Run docker build -t \$YOUR_IMAGE_NAME .
     > This creates a new docker image of the application. Once the image
     > is built, you can run a container based on that image.
 
