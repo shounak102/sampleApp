@@ -86,6 +86,8 @@ The routes supported by the backend server are:
     from the database if it exists and returns status 200 with the
     item that was deleted upon success.
 
+To test the backend routes, run ‘npm test’ in the root directory.
+
 ## Frontend: 
 
 The frontend is a single page application built using ReactJS. It uses
