@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eot-deployment-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eot-labs
+  template:
+    metadata:
+      labels:
+        app: eot-labs
+    spec:
+      containers:
+      - name: eot-labs-container
+        image: gcr.io/storied-oasis-412216/eot-labs-app:v2
+        ports:
+        - containerPort: 5000
+
